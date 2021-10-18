@@ -1,4 +1,4 @@
-package com.valko.SpringMusic.Beans;
+package com.valko.SpringMusic.Entity;
 
 import lombok.Data;
 
@@ -13,19 +13,22 @@ public class Song {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
 
     @Column
     @Size(min = 4, max = 32, message = "Songs name have length from 4 to 32 symbols")
-    @NotNull(message = "Cannot be null")
     private String name;
 
-    @ManyToOne
-    @JoinColumn(name = "author_id")
-    private Author author;
+    @Column
+    @Size(min = 4, max = 32, message = "Author name have length from 4 to 32 symbols")
+    private String author;
 
-    @ManyToOne
-    @JoinColumn(name = "genre_id")
+    @Column
+    @Size(min = 4, max = 32, message = "Album name have length from 4 to 32 symbols")
+    private String album;
+
+    @Column
+    @Enumerated(EnumType.STRING)
     private Genre genre;
 
     @Column
@@ -40,11 +43,11 @@ public class Song {
 
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -56,12 +59,20 @@ public class Song {
         this.name = name;
     }
 
-    public Author getAuthor() {
+    public String getAuthor() {
         return author;
     }
 
-    public void setAuthor(Author author) {
+    public void setAuthor(String author) {
         this.author = author;
+    }
+
+    public String getAlbum() {
+        return album;
+    }
+
+    public void setAlbum(String album) {
+        this.album = album;
     }
 
     public Genre getGenre() {

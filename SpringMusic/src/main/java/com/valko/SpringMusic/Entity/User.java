@@ -1,7 +1,6 @@
-package com.valko.SpringMusic.Beans;
+package com.valko.SpringMusic.Entity;
 
 import lombok.Data;
-import org.springframework.data.repository.cdi.Eager;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -14,7 +13,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
 
     @Column
     @Size(min = 4, max = 32, message = "User name have length from 4 to 32 symbols")
@@ -38,11 +37,11 @@ public class User {
     public User(){
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
