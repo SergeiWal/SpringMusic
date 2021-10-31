@@ -1,11 +1,16 @@
 package com.valko.SpringMusic.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.HashSet;
+import java.util.Set;
 
+@Slf4j
 @Entity
 @Table(name = "Songs")
 @Data
@@ -32,12 +37,17 @@ public class Song {
     private Genre genre;
 
     @Column
-    @Size(min=0)
+    //@Size(min=0)
     private int rating;
 
     @Column
     @NotNull(message = "Cannot be null")
     private String source;
+
+
+    @JsonIgnore
+    @ManyToMany(mappedBy = "songs")
+    private Set<Playlist> playlists = new HashSet<Playlist>() ;
 
     public Song(){
 
@@ -97,5 +107,9 @@ public class Song {
 
     public void setSource(String source) {
         this.source = source;
+    }
+
+    public Set<Playlist> getPlaylists() {
+        return playlists;
     }
 }

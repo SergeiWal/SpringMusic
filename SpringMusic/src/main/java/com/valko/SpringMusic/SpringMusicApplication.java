@@ -3,6 +3,14 @@ package com.valko.SpringMusic;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+//mvc
+//classes
+//validation
+//springData JPA
+//Repository
+
+
+
 @SpringBootApplication
 public class SpringMusicApplication {
 

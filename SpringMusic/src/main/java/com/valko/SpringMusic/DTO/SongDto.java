@@ -1,6 +1,6 @@
 package com.valko.SpringMusic.DTO;
-
 import com.valko.SpringMusic.Entity.Genre;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

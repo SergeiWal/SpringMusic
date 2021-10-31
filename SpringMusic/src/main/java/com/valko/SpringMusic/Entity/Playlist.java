@@ -3,7 +3,8 @@ package com.valko.SpringMusic.Entity;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "Playlists")
@@ -17,19 +18,19 @@ public class Playlist {
     @Column
     private String name;
 
-    @Column
-    @ManyToOne
-    @JoinColumn(name = "user_id")
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id",referencedColumnName = "id")
     private User owner;
 
-    @Column
+
     @ManyToMany
     @JoinTable(
             name="SongPlaylists",
             joinColumns = @JoinColumn(name = "playlist_id"),
             inverseJoinColumns = @JoinColumn(name = "song_id")
     )
-    private List<Song> songs;
+    private Set<Song> songs = new HashSet<Song>() ;
 
     public Playlist(){}
 
@@ -55,5 +56,16 @@ public class Playlist {
 
     public void setOwner(User owner) {
         this.owner = owner;
+    }
+
+    public Set<Song> getSongs() {
+        return songs;
+    }
+
+    public void addSongToPlaylist(Song song){
+        songs.add(song);
+    }
+    public void removeSongFromPlaylist(Song song){
+        songs.remove(song);
     }
 }

@@ -1,10 +1,13 @@
 package com.valko.SpringMusic.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "Users")
@@ -26,13 +29,17 @@ public class User {
     private String login;
 
     @Column
-    @Size(min=8, max = 32, message="Password must be from 8 to 32 symbols")
+    //@Size(min=8, max = 32, message="Password must be from 8 to 32 symbols")
     @NotNull(message = "Cannot be null")
     private long password;
 
     @Column
     @NotNull(message = "Cannot be null")
     private boolean isAdmin;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "owner")
+    private Set<Playlist> playlists = new HashSet<Playlist>();
 
     public User(){
     }
@@ -75,5 +82,12 @@ public class User {
 
     public void setAdmin(boolean admin) {
         isAdmin = admin;
+    }
+
+    public void addPlaylistToUser(Playlist playlist){
+        playlists.add(playlist);
+    }
+    public void deletePlaylistFromUser(Playlist playlist){
+        playlists.remove(playlist);
     }
 }
