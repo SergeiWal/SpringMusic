@@ -43,6 +43,7 @@ public class MainAppController {
 
     @GetMapping(value = "/admin")
     public String admin(Model model){
+        model.addAttribute("songs", songRepository.findAll());
         return "admin";
     }
 
