@@ -4,6 +4,7 @@ import com.valko.SpringMusic.Entity.Playlist;
 import com.valko.SpringMusic.Entity.User;
 import com.valko.SpringMusic.Repository.PlaylistRepository;
 import com.valko.SpringMusic.Repository.UserRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,6 +12,7 @@ import java.util.List;
 import java.util.Set;
 
 
+@Slf4j
 @RestController
 @RequestMapping(value = "/users")
 public class UserREstController {
@@ -36,10 +38,6 @@ public class UserREstController {
         return userRepository.findById(user_id).get().getPlaylists();
     }
 
-//    @GetMapping(value = "/{user_id}/playlists/{playlist_id}")
-//    Set<Playlist> getUsersPlaylists(@PathVariable long user_id){
-//        return userRepository.findById(user_id).get().getPlaylists();
-//    }
 
     @PostMapping
     User saveUser(@RequestBody User user){

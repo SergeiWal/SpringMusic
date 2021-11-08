@@ -2,19 +2,26 @@ package com.valko.SpringMusic.Controller;
 
 import com.valko.SpringMusic.Entity.Playlist;
 import com.valko.SpringMusic.Entity.Song;
+import com.valko.SpringMusic.Repository.PlaylistRepository;
 import com.valko.SpringMusic.Repository.SongRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
+@Slf4j
 @RestController
 @RequestMapping(value = "/songs")
 public class SongRestController{
 
     @Autowired
     SongRepository songRepository;
+
+    @Autowired
+    PlaylistRepository playlistRepository;
 
     @GetMapping
     List<Song> getSongs(){
@@ -33,15 +40,13 @@ public class SongRestController{
     }
 
     @DeleteMapping(value = "/{id}")
-    Song deleteSongById(@PathVariable long id){
+    Long deleteSongById(@PathVariable long id){
         Song song = songRepository.findById(id).get();
-        songRepository.deleteById(id);
-        return song;
+        for(Playlist playlist: song.getPlaylists()){
+            song.removePlaylist(playlist);
+        }
+        songRepository.delete(song);
+        return id;
     }
 
-    @DeleteMapping
-    Song deleteSong(@RequestBody Song song){
-        songRepository.delete(song);
-        return song;
-    }
 }

@@ -2,6 +2,7 @@ package com.valko.SpringMusic.Entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.persistence.*;
@@ -12,6 +13,7 @@ import java.util.Set;
 
 @Slf4j
 @Entity
+@EqualsAndHashCode(exclude = "playlists")
 @Table(name = "Songs")
 @Data
 public class Song {
@@ -47,7 +49,7 @@ public class Song {
 
     @JsonIgnore
     @ManyToMany(mappedBy = "songs")
-    private Set<Playlist> playlists = new HashSet<Playlist>() ;
+    private Set<Playlist> playlists = new HashSet<>() ;
 
     public Song(){
 
@@ -111,5 +113,10 @@ public class Song {
 
     public Set<Playlist> getPlaylists() {
         return playlists;
+    }
+
+    public void removePlaylist(Playlist playlist){
+        this.playlists.remove(playlist);
+        playlist.getSongs().remove(this);
     }
 }

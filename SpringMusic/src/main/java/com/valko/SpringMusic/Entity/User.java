@@ -29,16 +29,16 @@ public class User {
     private String login;
 
     @Column
-    //@Size(min=8, max = 32, message="Password must be from 8 to 32 symbols")
+    @Size(min=8, max = 32, message="Password must be from 8 to 32 symbols")
     @NotNull(message = "Cannot be null")
-    private long password;
+    private String password;
 
     @Column
     @NotNull(message = "Cannot be null")
     private boolean isAdmin;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "owner")
+    @OneToMany(mappedBy = "owner", targetEntity = Playlist.class)
     private Set<Playlist> playlists = new HashSet<Playlist>();
 
     public User(){
@@ -68,11 +68,11 @@ public class User {
         this.login = login;
     }
 
-    public long getPassword() {
+    public String getPassword() {
         return password;
     }
 
-    public void setPassword(long password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 
