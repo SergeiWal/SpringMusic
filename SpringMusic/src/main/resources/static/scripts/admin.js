@@ -1,4 +1,5 @@
 const rootPath = "E:/GIT/Music/";
+const form = document.querySelector("form");
 
 document.addEventListener("click",(e)=>{
 
@@ -18,6 +19,21 @@ document.addEventListener("click",(e)=>{
             method: "POST",
             body: JSON.stringify(body),
             headers: {"Content-Type":"application/json"}
-        }).then(response=>response.json()).then(data=>console.log(data)).catch(err=>console.log(err));
-   }
+        }).then(response=>response.json())
+            .then(data=>{
+                console.log(data);
+                document.location.reload();
+            })
+            .catch(err=>console.log(err))
+   } else if(target.classList.contains("song_button")){
+        e.preventDefault();
+        console.log("song_button");
+        const id = e.target.getAttribute("src");
+        fetch(`http://localhost:8083/songs/${id}`,{
+            method: "DELETE"
+        }).then(request=>request.json()).then(data=>{
+            console.log(data);
+            document.location.reload();
+        }).catch(err=>console.log(err));
+    }
 });

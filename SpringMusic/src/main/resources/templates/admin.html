@@ -6,7 +6,6 @@
           rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
           crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" th:href="@{/styles/admin.css}">
-    <script  th:src="@{/scripts/admin.js}"></script>
     <title>Title</title>
 </head>
 <body>
@@ -19,10 +18,6 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <form class="d-flex">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit">Search</button>
-                    </form>
                 </div>
             </div>
         </nav>
@@ -33,18 +28,18 @@
             <form>
                 <div class="mb-3">
                     <label for="songName" class="form-label">Name</label>
-                    <input type="text" class="form-control" id="songName" aria-describedby="emailHelp">
+                    <input type="text" class="form-control" id="songName" aria-describedby="emailHelp" required>
                 </div>
                 <div class="mb-3">
                     <label for="songName" class="form-label">Author</label>
-                    <input type="text" class="form-control" id="songAuthor" aria-describedby="authorHelp">
+                    <input type="text" class="form-control" id="songAuthor" aria-describedby="authorHelp" required>
                 </div>
                 <div class="mb-3">
                     <label for="songName" class="form-label">Album</label>
-                    <input type="text" class="form-control" id="songAlbum" aria-describedby="albumHelp">
+                    <input type="text" class="form-control" id="songAlbum" aria-describedby="albumHelp" required>
                 </div>
                 <div class="mb-3">
-                    <select class="form-select" aria-label="Default select example" id="songGenre">
+                    <select class="form-select" aria-label="Default select example" id="songGenre" >
                         <option selected>ROCK</option>
                         <option value="2">RAP</option>
                         <option value="3">CLASSIC</option>
@@ -54,12 +49,13 @@
                 </div>
                 <div class="mb-3">
                     <label for="songName" class="form-label">Source</label>
-                    <input type="file" class="form-control" id="songSource" aria-describedby="sourceHelp">
+                    <input type="file" class="form-control" id="songSource" aria-describedby="sourceHelp" required>
                 </div>
                 <button  type="submit" class="btn btn-light save_btn">Save</button>
             </form>
         </div>
         <div class="songs_list">
+            <h3>Click on song for delete:</h3>
             <div class="list-group ">
                 <div th:each="song: ${songs}">
                     <button type="button"
@@ -74,5 +70,6 @@
     </div>
     <footer class="footer"></footer>
 </div>
+<script  th:src="@{/scripts/admin.js}"></script>
 </body>
 </html>
