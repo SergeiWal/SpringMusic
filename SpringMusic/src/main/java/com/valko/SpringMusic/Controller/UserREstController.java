@@ -3,14 +3,12 @@ package com.valko.SpringMusic.Controller;
 import com.valko.SpringMusic.Entity.Playlist;
 import com.valko.SpringMusic.Entity.User;
 import com.valko.SpringMusic.Service.UserService;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Set;
 
 
-@Slf4j
 @RestController
 @RequestMapping(value = "/users")
 public class UserREstController {

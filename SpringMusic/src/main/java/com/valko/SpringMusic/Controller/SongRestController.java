@@ -2,12 +2,11 @@ package com.valko.SpringMusic.Controller;
 import com.valko.SpringMusic.Entity.Song;
 import com.valko.SpringMusic.Repository.PlaylistRepository;
 import com.valko.SpringMusic.Service.SongService;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
-@Slf4j
+
 @RestController
 @RequestMapping(value = "/songs")
 public class SongRestController{
