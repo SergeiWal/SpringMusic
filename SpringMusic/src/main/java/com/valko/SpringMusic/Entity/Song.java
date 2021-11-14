@@ -3,6 +3,7 @@ package com.valko.SpringMusic.Entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.persistence.*;
@@ -16,6 +17,7 @@ import java.util.Set;
 @EqualsAndHashCode(exclude = "playlists")
 @Table(name = "Songs")
 @Data
+@ToString(exclude = "playlists")
 public class Song {
 
     @Id
@@ -117,6 +119,6 @@ public class Song {
 
     public void removePlaylist(Playlist playlist){
         this.playlists.remove(playlist);
-        playlist.getSongs().remove(this);
+        playlist.removeSong(this);
     }
 }

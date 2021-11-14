@@ -1,6 +1,8 @@
 package com.valko.SpringMusic.Entity;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -67,13 +69,14 @@ public class Playlist {
     public void addSongToPlaylist(Song song){
         songs.add(song);
     }
-    public void removeSongFromPlaylist(Song song){
-        songs.remove(song);
 
+    public void removeOwner(){
+        owner.deletePlaylistFromUser(this);
+        owner=null;
     }
 
     public void removeSong(Song song){
         this.getSongs().remove(song);
-        song.getPlaylists().remove(this);
+       // song.removePlaylist(this);
     }
 }

@@ -1,9 +1,8 @@
 package com.valko.SpringMusic.Controller;
 
 import com.valko.SpringMusic.Entity.Playlist;
-import com.valko.SpringMusic.Entity.Song;
-import com.valko.SpringMusic.Repository.PlaylistRepository;
-import com.valko.SpringMusic.Repository.SongRepository;
+import com.valko.SpringMusic.Service.PlaylistService;
+import com.valko.SpringMusic.Service.SongService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
@@ -20,9 +19,9 @@ public class MainAppController {
     private String pathSuffix = ".mp3";
 
     @Autowired
-    SongRepository songRepository;
+    SongService songService;
     @Autowired
-    PlaylistRepository playlistRepository;
+    PlaylistService playlistService;
 
     @GetMapping(value = "/")
     public String index(Model model){
@@ -41,25 +40,25 @@ public class MainAppController {
 
     @GetMapping(value = "/client")
     public String Client(Model model){
-        model.addAttribute("songs", songRepository.findAll());
+        model.addAttribute("songs", songService.findAll());
         return "client";
     }
 
     @GetMapping(value = "/client/create")
     public String CreatePlaylist(Model model){
-        model.addAttribute("songs", songRepository.findAll());
+        model.addAttribute("songs", songService.findAll());
         return "create_playlist";
     }
 
     @GetMapping(value = "/client/playlists")
     public String ClientPlaylists(Model model){
-        model.addAttribute("playlists", playlistRepository.findAll());
+        model.addAttribute("playlists", playlistService.findAll());
         return "clientPlaylists";
     }
 
     @GetMapping(value = "/client/playlist/{id}")
     public String ClientPlaylistById(@PathVariable Long id, Model model){
-        Playlist playlist =  playlistRepository.findById(id).get();
+        Playlist playlist =  playlistService.findOnePlaylist(id);
         model.addAttribute("playlist_name",playlist.getName());
         model.addAttribute("songs",playlist.getSongs());
         return "playlist";
@@ -67,7 +66,7 @@ public class MainAppController {
 
     @GetMapping(value = "/admin")
     public String admin(Model model){
-        model.addAttribute("songs", songRepository.findAll());
+        model.addAttribute("songs", songService.findAll());
         return "admin";
     }
 
@@ -77,7 +76,7 @@ public class MainAppController {
     )
     @ResponseBody
     public FileSystemResource getSong(@PathVariable long id) {
-        Song song = songRepository.findById(id).get();
-        return new FileSystemResource(song.getSource());
+        String src  = songService.findOneSongById(id).getSource();
+        return new FileSystemResource(src);
     }
 }

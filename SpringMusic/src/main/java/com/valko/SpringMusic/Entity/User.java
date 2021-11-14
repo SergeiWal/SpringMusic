@@ -2,6 +2,8 @@ package com.valko.SpringMusic.Entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -12,6 +14,8 @@ import java.util.Set;
 @Entity
 @Table(name = "Users")
 @Data
+@EqualsAndHashCode(exclude = "playlists")
+@ToString(exclude = "playlists")
 public class User {
 
     @Id
@@ -89,5 +93,6 @@ public class User {
     }
     public void deletePlaylistFromUser(Playlist playlist){
         playlists.remove(playlist);
+        playlist.removeOwner();
     }
 }
