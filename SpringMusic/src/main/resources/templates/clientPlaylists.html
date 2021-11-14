@@ -6,6 +6,7 @@
           rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
           crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" th:href="@{/styles/styles.css}">
+    <script th:src="@{/scripts/clientPlaylists.js}"></script>
     <title>Title</title>
 </head>
 <body>
@@ -20,10 +21,10 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Home</a>
+                            <a class="nav-link" aria-current="page" href="/client">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/client/playlists">Playlists</a>
+                            <a class="nav-link active" href="#" >Playlists</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/client/create">Create playlist</a>
@@ -40,23 +41,17 @@
     <div class="page__body">
         <div class="songs_list">
             <div class="list-group ">
-                <div th:each="song: ${songs}">
+                <div th:each="playlist: ${playlists}">
                     <button type="button"
-                            class="list-group-item list-group-item-action song_button"
-                            th:utext="${song.getName()}"
-                            data-th-src="${song.getId()}">
-                        ...
+                            class="list-group-item list-group-item-action song_button">
+                        <a th:utext="${playlist.getName()}" th:href="${'/client/playlist/' + playlist.getId()}">...</a>
                     </button>
                 </div>
             </div>
         </div>
     </div>
     <footer class="footer">
-        <div class="audio__player">
-            <audio controls src=""></audio>
-        </div>
     </footer>
 </div>
-<script  th:src="@{/scripts/client.js}"></script>
 </body>
 </html>

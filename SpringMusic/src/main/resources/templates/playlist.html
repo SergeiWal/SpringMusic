@@ -20,7 +20,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Home</a>
+                            <a class="nav-link" aria-current="page" href="/client">Home</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/client/playlists">Playlists</a>
@@ -39,6 +39,7 @@
     </header>
     <div class="page__body">
         <div class="songs_list">
+            <h3 th:utext="${playlist_name}"></h3>
             <div class="list-group ">
                 <div th:each="song: ${songs}">
                     <button type="button"
@@ -57,6 +58,6 @@
         </div>
     </footer>
 </div>
-<script  th:src="@{/scripts/client.js}"></script>
+<script th:src="@{/scripts/client.js}"></script>
 </body>
 </html>

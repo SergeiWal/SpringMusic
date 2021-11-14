@@ -1,6 +1,8 @@
 package com.valko.SpringMusic.Controller;
 
+import com.valko.SpringMusic.Entity.Playlist;
 import com.valko.SpringMusic.Entity.Song;
+import com.valko.SpringMusic.Repository.PlaylistRepository;
 import com.valko.SpringMusic.Repository.SongRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,8 @@ public class MainAppController {
 
     @Autowired
     SongRepository songRepository;
+    @Autowired
+    PlaylistRepository playlistRepository;
 
     @GetMapping(value = "/")
     public String index(Model model){
@@ -39,6 +43,26 @@ public class MainAppController {
     public String Client(Model model){
         model.addAttribute("songs", songRepository.findAll());
         return "client";
+    }
+
+    @GetMapping(value = "/client/create")
+    public String CreatePlaylist(Model model){
+        model.addAttribute("songs", songRepository.findAll());
+        return "create_playlist";
+    }
+
+    @GetMapping(value = "/client/playlists")
+    public String ClientPlaylists(Model model){
+        model.addAttribute("playlists", playlistRepository.findAll());
+        return "clientPlaylists";
+    }
+
+    @GetMapping(value = "/client/playlist/{id}")
+    public String ClientPlaylistById(@PathVariable Long id, Model model){
+        Playlist playlist =  playlistRepository.findById(id).get();
+        model.addAttribute("playlist_name",playlist.getName());
+        model.addAttribute("songs",playlist.getSongs());
+        return "playlist";
     }
 
     @GetMapping(value = "/admin")

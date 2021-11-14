@@ -43,11 +43,11 @@ public class PlaylistRestController {
         return playlist.getSongs();
     }
 
-    @PostMapping
-    Playlist savePlaylist( @RequestBody Playlist playlist){
-        playlistRepository.save(playlist);
-        return playlist;
-    }
+//    @PostMapping
+//    Playlist savePlaylist( @RequestBody Playlist playlist){
+//        playlistRepository.save(playlist);
+//        return playlist;
+//    }
 
     @PostMapping(value = "/{owner_id}")
     Playlist savePlaylistWithOwner(@RequestBody Playlist playlist,@PathVariable long owner_id){
