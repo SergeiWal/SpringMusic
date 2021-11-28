@@ -1,6 +1,7 @@
 package com.valko.SpringMusic.Entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.valko.SpringMusic.Validator.SongFile;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -25,15 +26,15 @@ public class Song {
     private long id;
 
     @Column
-    @Size(min = 4, max = 32, message = "Songs name have length from 4 to 32 symbols")
+    @Size(min = 4, max = 32, message = "{valid.name.size}")
     private String name;
 
     @Column
-    @Size(min = 4, max = 32, message = "Author name have length from 4 to 32 symbols")
+    @Size(min = 4, max = 32, message = "{valid.author.size}")
     private String author;
 
     @Column
-    @Size(min = 4, max = 32, message = "Album name have length from 4 to 32 symbols")
+    @Size(min = 4, max = 32, message = "{valid.album.size}")
     private String album;
 
     @Column
@@ -46,6 +47,7 @@ public class Song {
 
     @Column
     @NotNull(message = "Cannot be null")
+    @SongFile
     private String source;
 
 

@@ -23,22 +23,22 @@ public class User {
     private long id;
 
     @Column
-    @Size(min = 4, max = 32, message = "User name have length from 4 to 32 symbols")
-    @NotNull(message = "Cannot be null")
+    @Size(min = 4, max = 32, message = "{valid.name.notNull}")
+    @NotNull(message = "{valid.name.notNull}")
     private String name;
 
     @Column
-    @Size(min = 4, max = 20,message = "User length: from 4 to 32 symbols")
-    @NotNull(message = "Cannot be null")
+    @Size(min = 4, max = 20,message = "{valid.login.size}")
+    @NotNull(message = "{valid.login.notNull}")
     private String login;
 
     @Column
-    @Size(min=8, max = 32, message="Password must be from 8 to 32 symbols")
-    @NotNull(message = "Cannot be null")
+    @Size(min=8, max = 32, message="{valid.password.size}")
+    @NotNull(message = "{valid.password.notNull}")
     private String password;
 
     @Column
-    @NotNull(message = "Cannot be null")
+    @NotNull(message = "{valid.isAdmin.notNull}")
     private boolean isAdmin;
 
     @JsonIgnore

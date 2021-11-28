@@ -1,6 +1,7 @@
 package com.valko.SpringMusic.Controller;
 
 import com.valko.SpringMusic.Entity.Playlist;
+import com.valko.SpringMusic.Exception.ResourceNotFoundException;
 import com.valko.SpringMusic.Service.PlaylistService;
 import com.valko.SpringMusic.Service.SongService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,11 +23,6 @@ public class MainAppController {
     @Autowired
     PlaylistService playlistService;
 
-    @GetMapping(value = "/")
-    public String index(Model model){
-        return "index";
-    }
-
     @GetMapping(value = "/login")
     public String login(Model model){
         return "login";
@@ -43,6 +39,12 @@ public class MainAppController {
         return "client";
     }
 
+    @GetMapping(value = "/client/songs/{str}")
+    public String Client(@PathVariable String str, Model model){
+        model.addAttribute("songs", songService.findByIncludesStr(str));
+        return "songs";
+    }
+
     @GetMapping(value = "/client/create")
     public String CreatePlaylist(Model model){
         model.addAttribute("songs", songService.findAll());
@@ -56,7 +58,7 @@ public class MainAppController {
     }
 
     @GetMapping(value = "/client/playlist/{id}")
-    public String ClientPlaylistById(@PathVariable Long id, Model model){
+    public String ClientPlaylistById(@PathVariable Long id, Model model) throws ResourceNotFoundException {
         Playlist playlist =  playlistService.findOnePlaylist(id);
         model.addAttribute("playlist_name",playlist.getName());
         model.addAttribute("songs",playlist.getSongs());
@@ -69,12 +71,13 @@ public class MainAppController {
         return "admin";
     }
 
+
     @GetMapping(
             value = "/listen/{id}",
             produces = "audio/mp3"
     )
     @ResponseBody
-    public FileSystemResource getSong(@PathVariable long id) {
+    public FileSystemResource getSong(@PathVariable long id) throws ResourceNotFoundException {
         String src  = songService.findOneSongById(id).getSource();
         return new FileSystemResource(src);
     }

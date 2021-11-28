@@ -30,9 +30,12 @@
                         </li>
                     </ul>
                     <form class="d-flex">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit">Search</button>
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="search_input">
+                        <a id="search_button" href="#">
+                            <button class="btn btn-outline-success" type="button" >Search</button>
+                        </a>
                     </form>
+                    <button type="button" id="mail_message" class="btn btn-outline-success">Send email</button>
                 </div>
             </div>
         </nav>
@@ -59,5 +62,7 @@
     </footer>
 </div>
 <script th:src="@{/scripts/client.js}"></script>
+<script  th:src="@{/scripts/mail.js}"></script>
+<script  th:src="@{/scripts/search.js}"></script>
 </body>
 </html>
