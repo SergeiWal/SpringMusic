@@ -19,8 +19,7 @@ public class SongService {
     private SongRepository songRepository;
     @Autowired
     private PlaylistRepository playlistRepository;
-    @Autowired
-    private EmailService emailService;
+
 
     public List<Song> findAll(){
         return (List<Song>) songRepository.findAll();
@@ -46,7 +45,6 @@ public class SongService {
             throw new DuplicateException("Song exist");
         }
         songRepository.save(song);
-        emailService.send("korovaabc@gmail.com","SpringMusic","Added new song");
         return song;
     }
 

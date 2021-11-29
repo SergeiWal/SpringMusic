@@ -3,7 +3,7 @@ const playlist = {
     songs:[]
 }
 const songs = [];
-const ownerId = 2;
+let ownerId = 2;
 
 document.addEventListener('click',(e)=>{
     const token = localStorage.getItem("token");
@@ -25,6 +25,7 @@ document.addEventListener('click',(e)=>{
         e.preventDefault();
         const name = document.querySelector("#playlistName").value;
         playlist.name = name;
+        ownerId = localStorage.getItem("user_id");
         //console.log(playlist);
         fetch(`http://localhost:8083/playlists/${ownerId}`,{
             method:"POST",
@@ -39,7 +40,7 @@ document.addEventListener('click',(e)=>{
             })
             .then(data=>{
                 const result = JSON.parse(data);
-                addSongs(result.id);
+                addSongs(result['id']);
                 document.location.reload();
             })
             .catch(err=>{

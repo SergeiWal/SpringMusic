@@ -1,5 +1,6 @@
 package com.valko.SpringMusic.Controller;
 
+import com.valko.SpringMusic.DTO.UserResponse;
 import com.valko.SpringMusic.Entity.Playlist;
 import com.valko.SpringMusic.Entity.User;
 import com.valko.SpringMusic.Service.UserService;
@@ -29,6 +30,7 @@ public class UserREstController {
     User getOneUser(@PathVariable long id){
         return userService.findUserByID(id);
     }
+    
 
     @GetMapping(value = "/{user_id}/playlists")
     @ResponseStatus(HttpStatus.OK)

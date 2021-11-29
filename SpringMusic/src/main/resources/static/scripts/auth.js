@@ -17,7 +17,16 @@ function signIN(){
             const result = JSON.parse(data);
             console.log(result);
             localStorage.setItem('token',result['token']);
-            window.location.replace(window.location.origin);
+            fetch('/getUser',{
+                method:"POST",
+                headers:{
+                    'Authorization': `Bearer ${result['token']}`
+                }
+            }).then(response=>response.text()).then(data=>{
+                const resData = JSON.parse(data);
+                localStorage.setItem("user_id", resData['id']);
+                window.location.replace(window.location.origin);
+            })
         }).catch(err=>{
         console.log(err);
         infoMessage.innerHTML = "Sign In error: " + err;

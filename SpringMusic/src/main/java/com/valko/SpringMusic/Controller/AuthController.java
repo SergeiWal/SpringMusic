@@ -66,7 +66,7 @@ public class AuthController {
     }
 
     @PostMapping("/getUser")
-    public UserResponse getUser(@RequestHeader(name = "Authorisation") String jwt)  {
+    public UserResponse getUser(@RequestHeader(name = "Authorization") String jwt)  {
         String userName = jwtProvider.getLoginFromToken(jwt.substring(7));
         User user = userService.findByLogin(userName);
         String role = user.isAdmin()?"ROLE_ADMIN":"ROLE_USER";
