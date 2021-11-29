@@ -5,6 +5,7 @@ import com.valko.SpringMusic.Entity.User;
 import com.valko.SpringMusic.Repository.PlaylistRepository;
 import com.valko.SpringMusic.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Set;
@@ -16,6 +17,8 @@ public class UserService {
     private UserRepository userRepository;
     @Autowired
     private PlaylistRepository playlistRepository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     public List<User> findAll(){
         return (List<User>)userRepository.findAll();
@@ -44,8 +47,23 @@ public class UserService {
     }
 
     public User save(User user){
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
         return user;
+    }
+
+    public User findByLogin(String login){
+        return userRepository.findByLogin(login);
+    }
+
+    public User findByLoginAndPassword(String login, String password) {
+       User userEntity = findByLogin(login);
+        if (userEntity != null) {
+            if (passwordEncoder.matches(password, userEntity.getPassword())) {
+                return userEntity;
+            }
+        }
+        return null;
     }
 
     public long deleteUser(long id){

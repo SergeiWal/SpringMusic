@@ -11,9 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * security + jwt + authorization
  * junit
- * email - ? error with ssl
  */
 
 @Tag(name="Песни", description = "Контроллер работаетающий с треками")
@@ -40,7 +38,7 @@ public class SongRestController{
     }
 
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
+    @ResponseStatus(HttpStatus.OK)
     Song saveSong(@RequestBody Song song) throws DuplicateException {
         return songService.saveSong(song);
     }

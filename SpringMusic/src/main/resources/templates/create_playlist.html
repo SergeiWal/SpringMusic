@@ -6,14 +6,14 @@
           rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
           crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" th:href="@{/styles/admin.css}">
-    <title>Title</title>
+    <title>Spring Music</title>
 </head>
 <body>
 <div class="wrapper">
     <header class="header">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">SpringMusic</a>
+                <a class="navbar-brand" href="/">SpringMusic</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -49,8 +49,9 @@
                     <label for="playlistName" class="form-label">Name</label>
                     <input type="text" class="form-control" id="playlistName" aria-describedby="emailHelp" required>
                 </div>
-                <button  type="submit" class="btn btn-light save_btn">Save</button>
+                <button  type="button" class="btn btn-light save_btn">Save</button>
             </form>
+            <div class="info_message"></div>
         </div>
         <div class="songs_list">
             <h3>Add song to playlist:</h3>
@@ -66,7 +67,9 @@
             </div>
         </div>
     </div>
-    <footer class="footer"></footer>
+    <footer class="footer">
+
+    </footer>
 </div>
 <script  th:src="@{/scripts/createList.js}"></script>
 <script  th:src="@{/scripts/mail.js}"></script>

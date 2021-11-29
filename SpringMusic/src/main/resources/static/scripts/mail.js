@@ -1,5 +1,10 @@
 const button = document.querySelector('#mail_message');
 
 button.addEventListener('click',(e)=>{
-    fetch("http://localhost:8083/mail").then(response=>response.json()).then(data=>console.log(data));
+    const token = localStorage.getItem("token");
+    fetch("http://localhost:8083/mail",{
+        headers:{
+            'Authorization': `Bearer ${token}`
+        }
+    }).catch(err=>console.log(err));
 })

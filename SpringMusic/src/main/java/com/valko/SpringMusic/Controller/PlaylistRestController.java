@@ -40,7 +40,7 @@ public class PlaylistRestController {
     }
 
     @PostMapping(value = "/{owner_id}")
-    @ResponseStatus(HttpStatus.CREATED)
+    @ResponseStatus(HttpStatus.OK)
     Playlist savePlaylistWithOwner(@RequestBody Playlist playlist,@PathVariable long owner_id) throws DuplicateException {
         return playlistService.save(playlist,owner_id);
     }

@@ -33,7 +33,6 @@ public class User {
     private String login;
 
     @Column
-    @Size(min=8, max = 32, message="{valid.password.size}")
     @NotNull(message = "{valid.password.notNull}")
     private String password;
 

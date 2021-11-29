@@ -2,12 +2,13 @@ const playlist = {
     name: "",
     songs:[]
 }
-
 const songs = [];
 const ownerId = 2;
 
 document.addEventListener('click',(e)=>{
+    const token = localStorage.getItem("token");
     const object = e.target;
+    const info_message = document.querySelector('.info_message');
     if(object.classList.contains("song_button")){
         e.preventDefault();
         const songId = object.getAttribute("src");
@@ -27,21 +28,36 @@ document.addEventListener('click',(e)=>{
         //console.log(playlist);
         fetch(`http://localhost:8083/playlists/${ownerId}`,{
             method:"POST",
-            headers:{"Content-Type":"application/json"},
+            headers:{
+                "Content-Type":"application/json",
+                'Authorization': `Bearer ${token}`
+            },
             body: JSON.stringify(playlist)
         })
-            .then(request=>request.json())
+            .then(request=>{
+                return request.text();
+            })
             .then(data=>{
-                //console.log(data);
-                addSongs(data.id);
+                const result = JSON.parse(data);
+                addSongs(result.id);
                 document.location.reload();
             })
-            .catch(err=>console.log(err));
+            .catch(err=>{
+                info_message.innerHTML = `<p>${err}</p>`;
+                console.log(err);
+            });
     }
 })
 
 function addSongs(playlistId){
+    const token = localStorage.getItem("token");
     for(let song of songs){
-        fetch(`http://localhost:8083/playlists/${playlistId}/songs/${song}`,{method:"POST"}).catch(err=>console.log(err));
+        fetch(`http://localhost:8083/playlists/${playlistId}/songs/${song}`,
+            {
+                method:"POST",
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            }).catch(err=>console.log(err));
     }
 }

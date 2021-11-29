@@ -20,6 +20,8 @@ public class PlaylistService {
     private UserService userService;
     @Autowired
     private SongService songService;
+    @Autowired
+    private EmailService emailService;
 
     public List<Playlist> findAll(){
         return (List<Playlist>) playlistRepository.findAll();
@@ -40,6 +42,7 @@ public class PlaylistService {
             throw new DuplicateException("Playlist exist at this user");
         }
         playlistRepository.save(playlist);
+        emailService.send("korovaabc@gmail.com","SpringMusic","Added new playlist");
         return playlist;
     }
 
@@ -62,7 +65,7 @@ public class PlaylistService {
         return id;
     }
 
-    private boolean isExist(Playlist newPlaylist){
+   public boolean isExist(Playlist newPlaylist){
         List<Playlist> playlists = (List<Playlist>)playlistRepository.findAll();
         for(Playlist playlist : playlists){
             if(playlist.getName().equals(newPlaylist.getName()) &&

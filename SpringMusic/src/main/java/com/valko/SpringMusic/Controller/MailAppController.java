@@ -16,7 +16,7 @@ public class MailAppController {
     EmailService emailService;
 
     @GetMapping
-    public String sendMail(){
-        return  emailService.sendEmailMessage();
+    public void sendMail(){
+        emailService.send("korovaabc@gmail.com","SpringMusic","Test message from SpringMusic app");
     }
 }

@@ -16,6 +16,22 @@ body {
     background: #765f7d;
 }
 
+.header{
+    text-align: center;
+}
+
+.logo{
+    display: block;
+}
+
+.links
+{
+    text-decoration: none;
+    color: #cccccc;
+}
+
+
+
 .page__body{
     display: flex;
     justify-content: center;
@@ -50,6 +66,13 @@ body {
 .login__form, .registration__form{
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
+    margin-top: 50px;
+}
+
+.login__form__wrapper, .registration__form__wrapper{
     background: #ccc;
+    border-radius: 5px;
+    padding: 20px;
 }

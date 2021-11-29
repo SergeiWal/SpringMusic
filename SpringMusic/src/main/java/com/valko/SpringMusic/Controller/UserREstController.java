@@ -38,7 +38,7 @@ public class UserREstController {
 
 
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
+    @ResponseStatus(HttpStatus.OK)
     User saveUser(@RequestBody User user){
         userService.save(user);
         return user;
